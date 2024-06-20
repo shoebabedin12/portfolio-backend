@@ -1,24 +1,22 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const experienceSchema = new Schema(
-  {
-    company_name: {
-      type: String,
-    },
-    designation: {
-      type: String,
-    },
-    join_date: {
-      type: String,
-    },
-    leave_date: {
-      type: String,
-    },
+const experienceSchema = new mongoose.Schema({
+  company_name: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true,
+  designation: {
+    type: String,
+    required: true,
+  },
+  join_date: {
+    type: Date,
+    required: true,
+  },
+  leave_date: {
+    type: String,
+    required: true,
   }
-);
+});
 
-module.exports = mongoose.model("Experience", experienceSchema);
+module.exports = mongoose.model('Experience', experienceSchema);

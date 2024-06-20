@@ -6,6 +6,7 @@ const signupController = require("../controllers/signupController");
 const updateUserController = require("../controllers/updateUserController");
 const updateUserInfoController = require("../controllers/updateUserInfoController");
 const addExperienceController = require("../controllers/addExperienceController");
+const deleteExperienceController = require("../controllers/deleteExperienceController");
 
 // Set up storage for uploaded files
 const storage = multer.diskStorage({
@@ -28,5 +29,6 @@ router.post("/signup", signupController);
 router.post("/update-user", updateUserController);
 router.post("/update-user-info", upload.single('profile_img'), updateUserInfoController);
 router.post("/add-experience", addExperienceController);
+router.post("/delete-experience", deleteExperienceController);
 
 module.exports = router;

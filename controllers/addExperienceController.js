@@ -34,6 +34,7 @@ const addExperienceController = async (req, res) => {
 
     // Find the user by ID and update their experience field
     const user = await User.findById(userId);
+    
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -47,7 +48,11 @@ const addExperienceController = async (req, res) => {
     user.experience.push(savedExperience._id);
     await user.save();
 
-    res.status(200).json({ success: true, message: "Experience added successfully", experience: savedExperience });
+    // Populate the user's experience to include the full experience details
+    const getUserFullInfo = await User.findById(userId).populate('experience');
+
+
+    res.status(200).json({ success: true, message: "Experience added successfully", experience: savedExperience,  user: getUserFullInfo });
   } catch (error) {
     console.error("Error adding experience:", error);
     res.status(500).json({ message: "Internal Server Error" });

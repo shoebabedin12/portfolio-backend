@@ -8,7 +8,7 @@ const loginController = async (req, res) => {
   } else if (!password) {
     res.send("Please enter your password");
   } else {
-    const isExistUser = await User.find({ email: email });
+    const isExistUser = await User.find({ email: email }).populate("experience");
 
     if (isExistUser.length > 0) {
       bcrypt.compare(password, isExistUser[0].password).then(function (result) {
